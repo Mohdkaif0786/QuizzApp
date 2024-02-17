@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quizz App practice</title>
+    <link rel="stylesheet" href="quzz_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+    />
+    <script src="question.js"></script>
+    <script src="quizz_script.js"></script>
+  </head>
+  <body>
+    <div class="startQuizz_Btn">Quizz Start</div>
+    <div class="Quizz_box hidden">
+      <h1 class="Quizz_title">sh</h1>
+      <div class="options"></div>
+      <!-- quizz footer -->
+      <div class="qiuzz_footer">
+        <div class="left_footer">
+          1 to 5 Question
+        </div>
+        <div class="right_footer">
+          <div class="next_btn hidden">Next Question</div>
+        </div>
+      </div>
+    </div>
+    <!-- result box -->
+    <div class="result_box hidden">
+      <h1 class="result_title">Result</h1>
+      <div class="result">
+        <h2 class="total_question row">Total Question: 5</h2>
+        <h2 class="right_question row">Right Answer:</h2>
+        <h2 class="wrong_question row">Wrong Answer:</h2>
+        <h2 class="percentage row">Percentage: 60%</h2>
+      </div>
+      <button class="btn_wraper">
+        <div class="again_btn">Again Quizz</div>
+        <div class="exit_btn">Exit</div>
+      </button>
+    </div>
+
+    <script>
+      // declare varible
+      let Quizz_start_btn = document.querySelector(".startQuizz_Btn");
+      let Quizz_box = document.querySelector(".Quizz_box");
+      let quizz_title = document.querySelector(".Quizz_title");
+
+      let result_box = document.querySelector(".result_box");
+      let Q_Option_Box = document.querySelector(".options");
+      let next_btn = document.querySelector(".next_btn");
+      let total_question_filled = document.querySelector(".total_question");
+      let right_question_filled = document.querySelector(".right_question");
+      let wrong_question_filled = document.querySelector(".wrong_question");
+      let percentage_filled = document.querySelector(".percentage");
+      let again_Btn = document.querySelector(".again_btn");
+      let exit_btn = document.querySelector(".exit_btn");
+      const mark_check = '<i class="bi bi-check-lg"></i>';
+      const mark_cross = '<i class="bi bi-x"></i>';
+      let Q_index = 0;
+      let ALL_Option_filled;
+      let true_answ = 0;
+      let wrong_answ;
+      let percentage;
+      let cur_question = document.querySelector(".left_footer");
+      // start quizz btn code
+      Quizz_start_btn.addEventListener("click", Quizz_satart);
+      function Quizz_satart() {
+        // remove quizz btn
+        Quizz_start_btn.classList.add("hidden");
+        function reset() {
+          result_box.classList.add("hidden");
+          next_btn.innerHTML = "Next Question";
+          true_answ = 0;
+          wrong_answ = 0;
+          Q_index = 0;
+          showQuestion(Q_index);
+        }
+        // show quizz box
+        Q_index = 0;
+
+        // next btn_close
+        next_btn.classList.add("hidden");
+
+        showQuestion(Q_index);
+        Quizz_box.classList.remove("hidden");
+        function showQuestion(index) {
+          let options_statment = "";
+          quizz_title.innerHTML = `${questions[index]["num"]}. ${questions[Q_index]["question"]}`;
+          cur_question.innerHTML = `${questions[index]["num"]} to ${questions.length} Questions`;
+          for (i = 0; i < questions[index].Options.length; i++) {
+            options_statment += `<div class="option">${questions[index].Options[i]}</div>`;
+          }
+          Q_Option_Box.innerHTML = options_statment;
+          ALL_Option_filled = document.querySelectorAll(".option");
+          for (i = 0; i < questions[index].Options.length; i++) {
+            ALL_Option_filled[i].setAttribute("onClick", "fun(this)");
+          }
+        }
+        next_btn.addEventListener("click", function () {
+          next_btn.classList.add("hidden");
+          Q_index++;
+          if (Q_index < questions.length) {
+            showQuestion(Q_index);
+          } else {
+            Quizz_box.classList.add("hidden");
+            result_box.classList.remove("hidden");
+            wrong_answ = questions.length - true_answ;
+            percentage = ((true_answ * 100) / questions.length).toFixed(2);
+            total_question_filled.innerHTML = `Total Question: ${questions.length}`;
+            right_question_filled.innerHTML = `Right Answer: ${true_answ}`;
+            wrong_question_filled.innerHTML = `Wrong Answer:${wrong_answ}`;
+            percentage_filled.innerHTML = `Percentage ${percentage}%`;
+          }
+          if (Q_index == questions.length - 1) {
+            next_btn.innerHTML = "Finish";
+          }
+        });
+        again_Btn.addEventListener("click", function () {
+          Quizz_box.classList.remove("hidden");
+          reset();
+        });
+        exit_btn.addEventListener("click", function () {
+          result_box.classList.add("hidden");
+          Quizz_start_btn.classList.add("hidden");
+          // reset();
+        });
+      }
+
+      function fun(answer) {
+        next_btn.classList.remove("hidden");
+        let user_ans = answer.innerHTML;
+        let correct_answ = questions[Q_index]["answer"];
+        if (user_ans == correct_answ) {
+          answer.classList.add("disabled");
+          answer.insertAdjacentHTML("beforeEnd", mark_check);
+          answer.classList.add("correct");
+          true_answ += 1;
+        } else {
+          answer.classList.add("incorrect");
+          answer.classList.add("disabled");
+          answer.insertAdjacentHTML("beforeEnd", mark_cross);
+        }
+        for (i = 0; i < questions[Q_index].Options.length; i++) {
+          ALL_Option_filled[i].classList.add("disabled");
+          if (ALL_Option_filled[i].innerHTML == correct_answ) {
+            ALL_Option_filled[i].insertAdjacentHTML("beforeEnd", mark_check);
+            ALL_Option_filled[i].classList.add("correct");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

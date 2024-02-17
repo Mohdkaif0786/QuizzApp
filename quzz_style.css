@@ -1,0 +1,223 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #911ae2;
+  font-family: "Roboto", sans-serif;
+}
+.startQuizz_Btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 13px 17px;
+  border: 2px ridge white;
+  border-radius: 8px;
+  font-weight: 570;
+  cursor: pointer;
+  color: white;
+  transition: all 10ms;
+  box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.3),
+    2px 3px 3px 3px rgba(0, 0, 0, 0.3), 4px 2px 3px 4px rgba(0, 0, 0, 0.1),
+    5px 2px 3px 4px rgba(0, 0, 0, 0.1), 2px 2px 3px 4px rgba(0, 0, 0, 0.1);
+}
+.startQuizz_Btn:hover {
+  background-color: white;
+  color: #911ae2;
+}
+.hidden {
+  display: none;
+}
+#startQuizz_Btn:active {
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.Quizz_box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 80%;
+  transform: translate(-50%, -50%);
+  padding: 40px 40px;
+  border: 1px inset coral;
+  opacity: 0.8;
+  background-color: #f4c430;
+  border: 2px groove white;
+  box-shadow: 1px 2px 6px 3px rgba(76, 54, 173, 0.3),
+    3px 0px 6px 2px rgba(76, 54, 173, 0.3);
+}
+.Quizz_title {
+  color: white;
+  margin-top: 0px;
+  font-weight: 580;
+}
+
+.option {
+  padding: 13px 20px;
+  border: 1px solid white;
+  color: #ede4e3;
+  font-size: 16px;
+  font-weight: 550;
+  margin-top: 15px;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.option:hover {
+  background-color: #777ea3;
+}
+.qiuzz_footer {
+  margin-top: 30px;
+  display: flex;
+  /* border: 2px solid green; */
+  padding: 10px;
+  align-items: center;
+  border-top: 2px dashed white;
+  justify-content: space-between;
+}
+.next_btn {
+  padding: 11px 10px;
+  /* border: 1px solid red; */
+  border-radius: 8px;
+  font-weight: 570;
+  cursor: pointer;
+  border: 2px solid white;
+  /* background-color: #777ea3; */
+  color: white;
+  transition: 0.3s;
+  /* box-shadow: 1px 2px 6px 3px rgba(76, 54, 173, 0.3),
+    3px 0px 6px 2px rgba(76, 54, 173, 0.3); */
+}
+.next_btn:hover {
+  background-color: white;
+  color: #777ea3;
+}
+.left_footer {
+  color: white;
+  font-weight: 600;
+}
+.bi {
+  font-size: 33px;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  font-weight: 900;
+}
+.correct {
+  background-color: rgb(87, 201, 87);
+  color: rgb(46, 114, 46);
+  border: 1.2px solid rgb(46, 114, 46);
+}
+.incorrect {
+  background-color: rgb(234, 89, 89);
+  color: rgb(114, 75, 75);
+  border: 1.2px solid rgb(114, 75, 75);
+}
+.correct .bi {
+  color: green;
+}
+.incorrect .bi {
+  color: red;
+}
+
+/* result table */
+.result_box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #777ea3;
+  transform: translate(-50%, -50%);
+  /* padding: 40px 40px; */
+  width: 100%;
+  max-width: 500px;
+  border: 2px ridge white;
+}
+.result_title {
+  text-align: center;
+  background-color: white;
+  color: #f4c430;
+  padding: 10px 0px;
+  font-size: 35px;
+  text-decoration: underline;
+}
+.result {
+  padding: 0px 30px;
+  background-color: #777ea3;
+}
+.row {
+  margin-top: 8px;
+  color: white;
+  font-size: 20px;
+  font-weight: 570;
+}
+.btn_wraper {
+  width: 90%;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  background-color: #777ea3;
+}
+.again_btn {
+  padding: 10px 13px;
+  border-radius: 8px;
+  font-weight: 570;
+  cursor: pointer;
+  border: 2px solid white;
+  background-color: ;
+  color: white;
+  transition: 0.3s;
+}
+.again_btn:hover {
+  background-color: rgb(102, 255, 102);
+  border: none;
+  color: #777ea3;
+}
+.exit_btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 570;
+  cursor: pointer;
+  background-color: white;
+  color: rgb(235, 72, 72);
+  font-weight: bold;
+  transition: 0.3s;
+}
+.exit_btn:hover {
+  background-color: rgb(226, 129, 26);
+  color: white;
+}
+.disabled {
+  pointer-events: none;
+}
+@media (max-width: 500px) {
+  .Quizz_box {
+    padding: 30px 12px;
+  }
+  .Quizz_title {
+    color: white;
+    font-size: 24px;
+    font-weight: 580;
+  }
+  .option {
+    padding: 10px 10px;
+    font-size: 14px;
+  }
+  .left_footer {
+    font-size: 15px;
+  }
+  .next_btn {
+    padding: 10px 5px;
+  }
+  .result_box {
+    width: 100%;
+    max-width: 350px;
+  }
+}
